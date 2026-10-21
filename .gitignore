@@ -26,6 +26,9 @@ dist-ssr
 # Tournament runs
 .tournament
 
+# Bundled game server output (npm run server)
+.server
+
 # Credentials and local hosting configuration
 .env
 .env.*

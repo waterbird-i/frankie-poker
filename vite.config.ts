@@ -13,6 +13,16 @@ export default defineConfig(({ mode, command }) => {
         host: '0.0.0.0',
       },
       plugins: [tailwindcss(), react()],
+      // Two entry points: the single-player app and the multiplayer table page.
+      // `npm run server` serves both out of dist/ on one port.
+      build: {
+        rollupOptions: {
+          input: {
+            main: path.resolve(__dirname, 'index.html'),
+            table: path.resolve(__dirname, 'table.html'),
+          },
+        },
+      },
       define: {
         'process.env.OPENROUTER_API_KEY': JSON.stringify(localKey || '')
       },
