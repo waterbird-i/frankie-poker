@@ -35,6 +35,7 @@ export interface ServerOptions {
   port?: number;
   host?: string;
   staticDir?: string | null; // null disables static hosting
+  scriptDir?: string; // where this script lives; defaults to its own directory
   config?: Partial<TableConfig>;
   log?: (line: string) => void;
 }
@@ -74,7 +75,10 @@ export async function startServer(options: ServerOptions = {}): Promise<RunningS
   const log = options.log ?? ((line: string) => console.log(line));
   const config: Partial<TableConfig> = { ...tableConfigFromEnv(), ...options.config };
   const rooms = new RoomRegistry({ ...TABLE_DEFAULTS, ...config } as TableConfig);
-  const staticDir = options.staticDir === undefined ? path.resolve(process.cwd(), "dist") : options.staticDir;
+  // `import.meta.dirname` is where this script lives, so a phone that unpacks
+  // the server into one folder finds its client there without a working dir.
+  const scriptDir = options.scriptDir ?? (import.meta.dirname ?? process.cwd());
+  const staticDir = options.staticDir === undefined ? path.resolve(scriptDir, "dist") : options.staticDir;
 
   const serveStatic = async (res: ServerResponse, urlPath: string) => {
     if (!staticDir) return false;

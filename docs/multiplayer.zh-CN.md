@@ -17,6 +17,7 @@ npm run server    # 默认 8787：同一个进程同时托管 dist/ 和 WebSocke
 
 - **同一台电脑试玩**：开两个浏览器 profile（或一个无痕窗口），都访问上面的地址，各自输入名字 → 坐下 → 准备。
 - **局域网和朋友玩**：把 `localhost` 换成你的局域网 IP，例如 `http://192.168.1.20:8787/table?code=FRIENDS`。服务端默认监听 `0.0.0.0`，Windows 需要放行 8787 端口（首次运行会弹防火墙提示）。
+- **没有电脑，只用两台手机**：让安卓机跑 Termux + Node 当服务器、自己开热点，iPhone 连进来即可。步骤见 [`mobile-hotspot.zh-CN.md`](mobile-hotspot.zh-CN.md)。
 - **公网**：见下面「部署」。
 
 座位满了会有 `TABLE_FULL`；两人都点「准备」后自动开第一手牌，之后每手之间停顿几秒自动继续。

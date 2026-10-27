@@ -14,7 +14,8 @@
     "test:table": "esbuild scripts/test-table.ts --bundle --platform=node --format=esm --outfile=.tournament/test-table.mjs --log-level=error && node .tournament/test-table.mjs",
     "test:multiplayer": "esbuild scripts/test-multiplayer.ts --bundle --platform=node --format=esm --packages=external --outfile=.tournament/test-multiplayer.mjs --log-level=error && node .tournament/test-multiplayer.mjs",
     "test:browser": "node scripts/smoke-browser.mjs",
-    "server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=.server/server.mjs --log-level=error && node .server/server.mjs"
+    "server": "esbuild server/index.ts --bundle --platform=node --format=esm --packages=external --outfile=.server/server.mjs --log-level=error && node .server/server.mjs",
+    "pack:server": "npm run build && esbuild server/index.ts --bundle --platform=node --target=node18 --format=esm --packages=external --outfile=.server/server.mjs --log-level=error && node scripts/pack-server.mjs"
   },
   "dependencies": {
     "@lobehub/icons": "^5.23.0",
